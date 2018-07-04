@@ -26,7 +26,7 @@ namespace WebApplication.DA
                 while (dataReader.Read())
                 {
                     user.LoginID = dataReader["LoginID"].ToString();
-                    user.Password = dataReader["Password"].ToString();
+                    user.Password = dataReader["LoginPassword"].ToString();
                 }
             }
             con.Close();

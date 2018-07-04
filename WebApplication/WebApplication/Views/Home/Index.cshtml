@@ -1,9 +1,18 @@
-﻿
+﻿@model WebApplication.Domain.ProductCategoryDOM
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Layout/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-<p>@ViewBag.Message</p>
+@foreach (var item in Model.Type)
+{ 
+    <span>@item</span>
+    
+}
+
+@foreach (var item in Model.ID)
+{
+    <span>@item</span>
+
+}
 

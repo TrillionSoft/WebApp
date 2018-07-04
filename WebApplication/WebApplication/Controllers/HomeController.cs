@@ -11,14 +11,18 @@ namespace WebApplication.Controllers
     public class HomeController : Controller
     {
         UserDOM user = new UserDOM();
+        ProductCategoryDOM product = new ProductCategoryDOM();
         UserDA userDA = new UserDA();
+        ProductCategoryDA productDA = new ProductCategoryDA();
 
         // GET: Home
         public ActionResult Index()
         {
             user = userDA.selectUserPassword("CJ");
+            product = productDA.selectALLProductCategory();
             ViewBag.Message = user.Password;
-            return View();
+
+            return View(product);
         }
     }
 }
