@@ -19,7 +19,8 @@ namespace WebApplication.Controllers
         public ActionResult Index()
         {
             user = userDA.selectUserPassword("CJ");
-            product = productDA.selectALLProductCategory();
+            //  product = productDA.selectProductCategory();
+            product = productDA.selectALLCategory();
             ViewBag.Message = user.Password;
 
             return View(product);

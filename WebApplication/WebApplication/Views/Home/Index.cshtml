@@ -4,15 +4,22 @@
     Layout = "~/Views/Layout/_Layout.cshtml";
 }
 
-@foreach (var item in Model.Type)
-{ 
-    <span>@item</span>
-    
+@{ 
+    List<string> Type = new List<string>();
+    List<string> SubType = new List<string>();
+    Type = Model.Type;
+    SubType = Model.Description;
+
+    for(int i = 0; i < Type.Count();i++)
+    {
+        if (SubType[i] == "" || SubType[i - 1] == "")
+        {
+            <ul>@Type[i]</ul>
+        }
+
+        else
+        {
+            <li>@SubType[i]</li>
+        }
+    }
 }
-
-@foreach (var item in Model.ID)
-{
-    <span>@item</span>
-
-}
-
