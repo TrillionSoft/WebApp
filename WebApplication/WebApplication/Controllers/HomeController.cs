@@ -25,5 +25,11 @@ namespace WebApplication.Controllers
 
             return View(product);
         }
+
+        public ActionResult Menu()
+        {
+            product = productDA.selectALLCategory();
+            return PartialView(product);
+        }
     }
 }
