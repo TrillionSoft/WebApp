@@ -74,7 +74,6 @@ namespace WebApplication.DA
         public int updateProductCategory(ProductCategoryDOM product)
         {
             int result = 0;
-           ;
             try
             {
                 String sql = "UPDATE Product_Category SET ";

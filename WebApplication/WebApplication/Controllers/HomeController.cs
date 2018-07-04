@@ -18,7 +18,7 @@ namespace WebApplication.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            user = userDA.selectUserPassword("CJ");
+            //user = userDA.selectUserPassword("CJ");
             //  product = productDA.selectProductCategory();
             product = productDA.selectALLCategory();
             ViewBag.Message = user.Password;
