@@ -70,5 +70,54 @@ namespace WebApplication.DA
             con.Close();
             return product;
         }
+
+        public int updateProductCategory(ProductCategoryDOM product)
+        {
+            int result = 0;
+           ;
+            try
+            {
+                String sql = "UPDATE Product_Category SET ";
+                sql += "Type = @Type, Description = @Description, Deleted = @Deleted ";
+                sql += "WHERE ID = @ID";
+                SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+              
+                cmd.Parameters.AddWithValue("@Type", product.Type);
+                cmd.Parameters.AddWithValue("@Description", product.Description);
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return 0;
+            }
+
+            return result;
+        }
+
+        public int deleteProductByID(int ID)
+        {
+            int result = 0;
+
+            try
+            {
+                String sql = "DELETE Product_Category ";
+                sql += "WHERE ID = @ID";
+
+                SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@ID", ID);
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return 0;
+            }
+
+            return result;
+        }
     }
 }

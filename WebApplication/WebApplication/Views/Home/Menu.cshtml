@@ -5,21 +5,33 @@
     @{
         List<string> Type = new List<string>();
         List<string> SubType = new List<string>();
+        int counter = 0;
         Type = Model.Type;
         SubType = Model.Description;
 
         for (int i = 0; i < Type.Count(); i++)
         {
-            if (SubType[i] == "" || SubType[i - 1] == "")
+            if (SubType[i] == "" || SubType[i] == "")
             {
+                counter++;
                 <a href="#" class="w3-bar-item w3-button">@Type[i]</a>
             }
 
-            else
+            else if (SubType[i] == "" || SubType[i - 1] == "")
             {
-                <a href="#" class="w3-bar-item w3-button">@SubType[i]</a>
-            }
+                counter++;
+                <a onclick="myAccFunc()" href="javascript:void(0)" href="javascript:void(0)"  class="w3-button w3-block w3-white w3-left-align" id="myBtn">@Type[i] <i class="fa fa-caret-down"></i></a>
 
+                <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
+
+                  @for (int y = i ; y < Type.Count() - (counter-1); y++)
+                  {
+                      counter++;
+                    <a href="#" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>@SubType[y]</a>
+                  }
+                    
+                </div>
+            }
         }
     }
 </div>
@@ -33,6 +45,7 @@
         <a onclick="myAccFunc()" href="javascript:void(0)" class="w3-button w3-block w3-white w3-left-align" id="myBtn">
             Jeans <i class="fa fa-caret-down"></i>
         </a>
+
         <div id="demoAcc" class="w3-bar-block w3-hide w3-padding-large w3-medium">
             <a href="#" class="w3-bar-item w3-button w3-light-grey"><i class="fa fa-caret-right w3-margin-right"></i>Skinny</a>
             <a href="#" class="w3-bar-item w3-button">Relaxed</a>
