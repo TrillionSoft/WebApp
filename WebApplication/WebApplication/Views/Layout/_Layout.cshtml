@@ -244,8 +244,10 @@
 
     <script>
         // Accordion
-        function myAccFunc() {
-            var x = document.getElementById("demoAcc");
+        function myAccFunc(e) {
+            var btn = e + "_Btn";
+            var demo = e + "_Demo";
+            var x = document.getElementById(demo);
             if (x.className.indexOf("w3-show") == -1) {
                 x.className += " w3-show";
             } else {
@@ -254,7 +256,7 @@
         }
 
         // Click on the "Jeans" link on page load to open the accordion for demo purposes
-        document.getElementById("myBtn").click();
+        document.getElementById(btn).click();
 
 
         // Script to open and close sidebar
