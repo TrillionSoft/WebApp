@@ -15,6 +15,7 @@ namespace WebApplication.Lib
         {
             try
             {
+                int result = 0;
                 string FieldName = "(";
                 string FieldValues = "(";
                 SqlCommand cmd = new SqlCommand();
@@ -41,9 +42,11 @@ namespace WebApplication.Lib
                 cmd.CommandText = InsertQuery;
 
                 cmd.Connection = connection;
+                result = (int)cmd.ExecuteScalar();
                 connection.Close();
-                return (int)cmd.ExecuteScalar();
-                
+
+                return result;
+
             }
             catch (Exception ex)
             {
@@ -58,6 +61,7 @@ namespace WebApplication.Lib
         {
             try
             {
+                int result = 0;
                 string text = "";
                 SqlCommand cmd = new SqlCommand();
                 SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
@@ -79,8 +83,10 @@ namespace WebApplication.Lib
                 string UpdateQuery = "UPDATE " + TableName + " SET " + text + " WHERE ID = @ID ";
                 cmd.CommandText = UpdateQuery;
                 cmd.Connection = connection;
+                result = cmd.ExecuteNonQuery();
                 connection.Close();
-                return cmd.ExecuteNonQuery();
+                return result;
+                
             }
             catch (Exception ex)
             {
