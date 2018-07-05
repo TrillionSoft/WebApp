@@ -33,5 +33,28 @@ namespace WebApplication.DA
             return user;
         }
 
+        public bool checkLogin(string LoginID, string LoginPassword)
+        {
+
+            SqlConnection con = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+
+            con.Open();
+            String sql = "SELECT * From [User] where LoginID = @LoginID and LoginPassword = @LoginPassword";
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.Parameters.AddWithValue("@LoginID", LoginID);
+            cmd.Parameters.AddWithValue("@LoginPassword", LoginPassword);
+            SqlDataReader sdr = cmd.ExecuteReader();
+
+            if (sdr.Read())
+            {
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }
