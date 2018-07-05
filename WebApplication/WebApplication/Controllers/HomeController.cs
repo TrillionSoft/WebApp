@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using WebApplication.DA;
 using WebApplication.Domain;
 using WebApplication.Lib;
+using System.Web.Security;
+using System.Security.Principal;
 
 namespace WebApplication.Controllers
 {
@@ -19,6 +21,7 @@ namespace WebApplication.Controllers
          LIB lib = new LIB();
 
         // GET: Home
+        [Authorize]
         public ActionResult Index()
         {
             //user = userDA.selectUserPassword("CJ");
@@ -56,9 +59,57 @@ namespace WebApplication.Controllers
             return PartialView(product);
         }
 
+        private void EnsureLoggedOut()
+        {
+            // If the request is (still) marked as authenticated we send the user to the logout action
+            if (Request.IsAuthenticated)
+                Logout();
+        }
+
         public ActionResult Login()
         {
+            EnsureLoggedOut();
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(UserDOM input)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var login = userDA.checkLogin(input.LoginID, input.LoginPassword);
+                if (login == true)
+                {
+                    FormsAuthentication.SetAuthCookie(input.LoginID, input.RememberMe);
+                    return RedirectToAction("Index", "Home");
+                }
+
+            }
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            try
+            {
+                FormsAuthentication.SignOut();
+
+                // Second we clear the principal to ensure the user does not retain any authentication
+                //required NameSpace: using System.Security.Principal;
+                HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
+
+                Session.Clear();
+                System.Web.HttpContext.Current.Session.RemoveAll();
+
+                // Last we redirect to a controller/action that requires authentication to ensure a redirect takes place
+                // this clears the Request.IsAuthenticated flag since this triggers a new request
+                return RedirectToAction("Index", "Home");
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public ActionResult Register()
