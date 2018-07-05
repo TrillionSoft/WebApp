@@ -77,23 +77,27 @@ namespace WebApplication.DA
             try
             {
                 String sql = "UPDATE Product_Category SET ";
-                sql += "Type = @Type, Description = @Description, Deleted = @Deleted ";
+                sql += "Type = @Type, Description = '', Deleted = @Deleted ";
                 sql += "WHERE ID = @ID";
                 SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
                 SqlCommand cmd = new SqlCommand(sql, connection);
 
-              
-                cmd.Parameters.AddWithValue("@Type", product.Type);
-                cmd.Parameters.AddWithValue("@Description", product.Description);
-                result = cmd.ExecuteNonQuery();
+               cmd.Parameters.AddWithValue("@ID", product.ID[0]);
+               cmd.Parameters.AddWithValue("@Type", product.Type[0]);
+               cmd.Parameters.AddWithValue("@Description", product.Description[0]);
+               cmd.Parameters.AddWithValue("@Deleted", product.Deleted[0]);
+
+               connection.Open();
+               result = (int)cmd.ExecuteScalar(); 
+               connection.Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                return 0;
+               return 0;
             }
 
-            return result;
+           return result;
         }
 
         public int deleteProductByID(int ID)

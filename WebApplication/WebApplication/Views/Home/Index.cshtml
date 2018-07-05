@@ -1,10 +1,11 @@
-﻿@model WebApplication.Domain.ProductCategoryDOM
+﻿@*@model WebApplication.Domain.ProductCategoryDOM*@
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Layout/_Layout.cshtml";
 }
 
-@{
+@*@{
     List<string> Type = new List<string>();
     List<string> SubType = new List<string>();
     int counter = 0;
@@ -42,4 +43,19 @@
             }
         }
     }
-    }
+    }*@
+
+@if (ViewBag.Message != null)
+{
+<script>
+
+$(document).ready(function(){
+
+alert('@ViewBag.Message');
+
+});
+
+    </script>
+
+}
+

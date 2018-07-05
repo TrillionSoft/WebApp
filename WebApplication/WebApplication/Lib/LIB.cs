@@ -19,16 +19,19 @@ namespace WebApplication.Lib
                 string FieldValues = "(";
                 SqlCommand cmd = new SqlCommand();
                 SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                connection.Open();
                 var a = ClassObject.GetType().GetProperties().ToList();
 
                 for (int i = 1; i < a.Count; i++)
                 {
                     if (FieldName.Length > 1) FieldName += ",";
                     if (FieldValues.Length > 1) FieldValues += ",";
+
                     FieldName += a[i].Name;
                     FieldValues += "@" + a[i].Name;
 
-                   cmd.Parameters.AddWithValue("@" + a[i].Name, ClassObject.GetType().GetProperty(a[i].Name).GetValue(ClassObject));
+                    cmd.Parameters.AddWithValue("@" + a[i].Name, ClassObject.GetType().GetProperty(a[i].Name).GetValue(ClassObject));
+                    System.Diagnostics.Debug.WriteLine(ClassObject.GetType().GetProperty(a[i].Name).GetValue(ClassObject));
                 }
 
                 FieldName += ")";
@@ -36,14 +39,16 @@ namespace WebApplication.Lib
 
                 string InsertQuery = "INSERT INTO " + TableName + " " + FieldName + " OUTPUT INSERTED.ID VALUES " + FieldValues;
                 cmd.CommandText = InsertQuery;
-                cmd.Connection = connection;
 
+                cmd.Connection = connection;
+                connection.Close();
                 return (int)cmd.ExecuteScalar();
+                
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
-                throw;
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+                return 0;
             }
         }
         #endregion
@@ -56,6 +61,7 @@ namespace WebApplication.Lib
                 string text = "";
                 SqlCommand cmd = new SqlCommand();
                 SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+                connection.Open();
                 var a = ClassObject.GetType().GetProperties().ToList();
 
                 for (int i = 0; i < a.Count; i++)
@@ -73,7 +79,7 @@ namespace WebApplication.Lib
                 string UpdateQuery = "UPDATE " + TableName + " SET " + text + " WHERE ID = @ID ";
                 cmd.CommandText = UpdateQuery;
                 cmd.Connection = connection;
-
+                connection.Close();
                 return cmd.ExecuteNonQuery();
             }
             catch (Exception ex)

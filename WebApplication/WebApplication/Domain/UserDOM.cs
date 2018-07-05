@@ -9,6 +9,6 @@ namespace WebApplication.Domain
     {
         public int ID { get; set; }
         public string LoginID { get; set; }
-        public string Password { get; set; }
+        public string LoginPassword { get; set; }
     }
 }
