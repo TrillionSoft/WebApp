@@ -1,0 +1,15 @@
+﻿@model WebApplication.Domain.ProductDOM
+
+
+@using (Ajax.BeginForm("AddProduct", "Product", new AjaxOptions() { HttpMethod = "POST" }, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="file" name="files"><br>
+    <input type="submit" value="Upload File to Server">
+}
+
+@{
+    byte[] image = Model.Image;
+}
+
+<img src="data:image;base64,@System.Convert.ToBase64String(image)" width="400" height="500" />  
