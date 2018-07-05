@@ -1,9 +1,37 @@
-﻿
+﻿@model WebApplication.Domain.UserDOM
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Layout/_Layout.cshtml";
 }
 
 <h2>Login</h2>
+@ViewBag.A
+@ViewBag.B
+@Html.ValidationSummary(true)
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.LoginID) <br />
+        @Html.TextBoxFor(m => m.LoginID, new { maxlength = 20, autofocus = "", placeholder = "ID" })
+        @Html.ValidationMessageFor(m => m.LoginID)
+    </div>
 
+    <div>
+        @Html.LabelFor(m => m.LoginPassword) <br />
+        @Html.PasswordFor(m => m.LoginPassword, new { maxlength = 20, placeholder = "password" })
+        @Html.ValidationMessageFor(m => m.LoginPassword)
+    </div>
 
+    <div>
+        <label class="cb">
+            @Html.CheckBoxFor(m => m.RememberMe) Remember Me
+        </label>
+    </div>
+
+    <div>
+        <button type="submit" class="button special">Sign In</button>
+        <button type="reset" class="button special">Reset</button>
+        <a href="/User/Reset" class="button special">Forget Passwords</a>
+    </div>
+
+}
