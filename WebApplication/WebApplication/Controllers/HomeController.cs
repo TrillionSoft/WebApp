@@ -42,7 +42,7 @@ namespace WebApplication.Controllers
             //int result = productDA.updateProductCategory(product);
 
             user.LoginID = "Testing123";
-            user.LoginPassword = "Testing123";
+            user.LoginPassword = "Testing3";
             if (LIB.insertFunction(user,"[User]") > 0)
             {
                 ViewBag.Message = "Successful Insert";
