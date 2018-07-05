@@ -85,8 +85,8 @@
         <!-- Top header -->
         <header class="w3-container w3-xlarge">
             <p class="w3-right">
-                <a href="#" class="w3-button">Login</a>
-                <a href="#" class="w3-button">Register</a>
+                @Html.ActionLink("Login", "Login", "Home", null, new { @class = "w3-button", hidefocus = "hidefocus" })
+                @Html.ActionLink("Register", "Register", "Home", null, new { @class = "w3-button", hidefocus = "hidefocus" })
                 <i class="fa fa-shopping-cart w3-margin-right"></i>
                 <i class="fa fa-search"></i>
             </p>
