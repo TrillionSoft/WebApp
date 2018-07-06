@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShoppingDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PC_ID" Type="int" />
+    <Property Name="SPC_ID" Type="int" />
+    <Property Name="Brand" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Production_Country" Type="varchar" MaxLength="50" />
+    <Property Name="Material" Type="varchar" MaxLength="50" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="Image" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Product_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Product_Details">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Product_ID" Type="int" />
+    <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="Colour" Type="varchar" MaxLength="50" />
+    <Property Name="Size" Type="varchar" MaxLength="50" />
+    <Property Name="Length" Type="varchar" MaxLength="50" />
+    <Property Name="Unit_Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Offer_Chk" Type="bit" />
+    <Property Name="Offer_Percentage" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Offer_Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Total_Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Sub_Product_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PC_ID" Type="int" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LoginID" Type="varchar" MaxLength="50" />
+    <Property Name="LoginPassword" Type="varchar" MaxLength="50" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <Association Name="FK_Product_Details_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Product_Details" Type="Self.Product_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product_Details">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sub_Product_Category_Product_Category">
+    <End Role="Product_Category" Type="Self.Product_Category" Multiplicity="0..1" />
+    <End Role="Sub_Product_Category" Type="Self.Sub_Product_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Sub_Product_Category">
+        <PropertyRef Name="PC_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShoppingDBModelStoreContainer">
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="cj" store:Type="Tables" />
+    <EntitySet Name="Product_Category" EntityType="Self.Product_Category" Schema="cj" store:Type="Tables" />
+    <EntitySet Name="Product_Details" EntityType="Self.Product_Details" Schema="cj" store:Type="Tables" />
+    <EntitySet Name="Sub_Product_Category" EntityType="Self.Sub_Product_Category" Schema="cj" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="cj" store:Type="Tables" />
+    <AssociationSet Name="FK_Product_Details_Product" Association="Self.FK_Product_Details_Product">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Product_Details" EntitySet="Product_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sub_Product_Category_Product_Category" Association="Self.FK_Sub_Product_Category_Product_Category">
+      <End Role="Product_Category" EntitySet="Product_Category" />
+      <End Role="Sub_Product_Category" EntitySet="Sub_Product_Category" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,13 @@
+﻿@model WebApplication.Domain.UserDOM
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Layout/_Layout.cshtml";
+}
+
+<h2>Create User</h2>
+@using (Html.BeginForm())
+{
+    <div>@Html.LabelFor(m => m.LoginID): @Html.TextBoxFor(m => m.LoginID)</div>
+    <div>@Html.LabelFor(m => m.LoginPassword) @Html.TextBoxFor(m => m.LoginPassword)</div>
+    <button type="submit" class="button special">Sign Up</button>
+}

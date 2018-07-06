@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Retrive";
+    Layout = "~/Views/Layout/_Layout.cshtml";
+}
+
+@model IEnumerable<WebApplication.Models.User>
+
+<h2>Retrive User List</h2>
+@foreach (var s in Model)
+{
+<div>@s.ID @s.LoginID @s.LoginPassword @Html.ActionLink("Details", "RetriveDetails", new { id = s.ID }) @Html.ActionLink("Edit", "Edit", new { id = s.ID })  @Html.ActionLink("Delete", "Delete", new { id = s.ID })</div>
+}
+

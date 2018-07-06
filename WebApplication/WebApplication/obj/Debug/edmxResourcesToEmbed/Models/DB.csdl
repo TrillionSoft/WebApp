@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShoppingDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PC_ID" Type="Int32" />
+    <Property Name="SPC_ID" Type="Int32" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Production_Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Material" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Deleted" Type="Boolean" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Product_Details" Relationship="ShoppingDBModel.FK_Product_Details_Product" FromRole="Product" ToRole="Product_Details" />
+  </EntityType>
+  <EntityType Name="Product_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Sub_Product_Category" Relationship="ShoppingDBModel.FK_Sub_Product_Category_Product_Category" FromRole="Product_Category" ToRole="Sub_Product_Category" />
+  </EntityType>
+  <EntityType Name="Product_Details">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Product_ID" Type="Int32" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Colour" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Length" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Unit_Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Offer_Chk" Type="Boolean" />
+    <Property Name="Offer_Percentage" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Offer_Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Total_Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Product" Relationship="ShoppingDBModel.FK_Product_Details_Product" FromRole="Product_Details" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Sub_Product_Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PC_ID" Type="Int32" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Product_Category" Relationship="ShoppingDBModel.FK_Sub_Product_Category_Product_Category" FromRole="Sub_Product_Category" ToRole="Product_Category" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LoginID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LoginPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Deleted" Type="Boolean" />
+  </EntityType>
+  <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Product_Category" EntityType="Self.Product_Category" />
+    <EntitySet Name="Product_Details" EntityType="Self.Product_Details" />
+    <EntitySet Name="Sub_Product_Category" EntityType="Self.Sub_Product_Category" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Product_Details_Product" Association="ShoppingDBModel.FK_Product_Details_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Product_Details" EntitySet="Product_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sub_Product_Category_Product_Category" Association="ShoppingDBModel.FK_Sub_Product_Category_Product_Category">
+      <End Role="Product_Category" EntitySet="Product_Category" />
+      <End Role="Sub_Product_Category" EntitySet="Sub_Product_Category" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Product_Details_Product">
+    <End Type="ShoppingDBModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="ShoppingDBModel.Product_Details" Role="Product_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product_Details">
+        <PropertyRef Name="Product_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sub_Product_Category_Product_Category">
+    <End Type="ShoppingDBModel.Product_Category" Role="Product_Category" Multiplicity="0..1" />
+    <End Type="ShoppingDBModel.Sub_Product_Category" Role="Sub_Product_Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product_Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Sub_Product_Category">
+        <PropertyRef Name="PC_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
