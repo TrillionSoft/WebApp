@@ -12,6 +12,7 @@
         <EntityTypeShape EntityType="ShoppingDBModel.User" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <AssociationConnector Association="ShoppingDBModel.FK_Product_Details_Product" />
         <AssociationConnector Association="ShoppingDBModel.FK_Sub_Product_Category_Product_Category" />
+        <EntityTypeShape EntityType="ShoppingDBModel.Promotion" Width="1.5" PointX="5.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

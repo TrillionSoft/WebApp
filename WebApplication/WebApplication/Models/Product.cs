@@ -29,6 +29,7 @@ namespace WebApplication.Models
         public string Material { get; set; }
         public Nullable<bool> Deleted { get; set; }
         public byte[] Image { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product_Details> Product_Details { get; set; }

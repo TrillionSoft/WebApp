@@ -13,6 +13,7 @@
           <Property Name="PC_ID" Type="int" />
           <Property Name="SPC_ID" Type="int" />
           <Property Name="Brand" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="50" />
           <Property Name="Production_Country" Type="varchar" MaxLength="50" />
           <Property Name="Material" Type="varchar" MaxLength="50" />
@@ -42,8 +43,24 @@
           <Property Name="Offer_Chk" Type="bit" />
           <Property Name="Offer_Percentage" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Offer_Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Offer_Until_Date" Type="varchar" MaxLength="50" />
           <Property Name="Total_Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Image" Type="varbinary(max)" />
           <Property Name="Deleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brand" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Unit_Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Offer_Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Offer_Percentage" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Offer_Until_Date" Type="varchar" MaxLength="50" />
+          <Property Name="Total_Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Sub_Product_Category">
           <Key>
@@ -92,6 +109,7 @@
           <EntitySet Name="Product" EntityType="Self.Product" Schema="cj" store:Type="Tables" />
           <EntitySet Name="Product_Category" EntityType="Self.Product_Category" Schema="cj" store:Type="Tables" />
           <EntitySet Name="Product_Details" EntityType="Self.Product_Details" Schema="cj" store:Type="Tables" />
+          <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="cj" store:Type="Tables" />
           <EntitySet Name="Sub_Product_Category" EntityType="Self.Sub_Product_Category" Schema="cj" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="cj" store:Type="Tables" />
           <AssociationSet Name="FK_Product_Details_Product" Association="Self.FK_Product_Details_Product">
@@ -121,6 +139,7 @@
           <Property Name="Deleted" Type="Boolean" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Product_Details" Relationship="ShoppingDBModel.FK_Product_Details_Product" FromRole="Product" ToRole="Product_Details" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Product_Category">
           <Key>
@@ -149,6 +168,8 @@
           <Property Name="Total_Price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Deleted" Type="Boolean" />
           <NavigationProperty Name="Product" Relationship="ShoppingDBModel.FK_Product_Details_Product" FromRole="Product_Details" ToRole="Product" />
+          <Property Name="Offer_Until_Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Sub_Product_Category">
           <Key>
@@ -184,6 +205,7 @@
             <End Role="Product_Category" EntitySet="Product_Category" />
             <End Role="Sub_Product_Category" EntitySet="Sub_Product_Category" />
           </AssociationSet>
+          <EntitySet Name="Promotions" EntityType="ShoppingDBModel.Promotion" />
         </EntityContainer>
         <Association Name="FK_Product_Details_Product">
           <End Type="ShoppingDBModel.Product" Role="Product" Multiplicity="0..1" />
@@ -209,6 +231,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Unit_Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Offer_Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Offer_Percentage" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Offer_Until_Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Total_Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -218,6 +254,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ShoppingDBModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="PC_ID" ColumnName="PC_ID" />
                 <ScalarProperty Name="SPC_ID" ColumnName="SPC_ID" />
@@ -243,6 +280,8 @@
           <EntitySetMapping Name="Product_Details">
             <EntityTypeMapping TypeName="ShoppingDBModel.Product_Details">
               <MappingFragment StoreEntitySet="Product_Details">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Offer_Until_Date" ColumnName="Offer_Until_Date" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -276,6 +315,21 @@
                 <ScalarProperty Name="LoginID" ColumnName="LoginID" />
                 <ScalarProperty Name="LoginPassword" ColumnName="LoginPassword" />
                 <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promotions">
+            <EntityTypeMapping TypeName="ShoppingDBModel.Promotion">
+              <MappingFragment StoreEntitySet="Promotion">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+                <ScalarProperty Name="Offer_Until_Date" ColumnName="Offer_Until_Date" />
+                <ScalarProperty Name="Offer_Percentage" ColumnName="Offer_Percentage" />
+                <ScalarProperty Name="Offer_Price" ColumnName="Offer_Price" />
+                <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -5,45 +5,6 @@
     Layout = "~/Views/Layout/_Layout.cshtml";
 }
 
-@*@{
-    List<string> Type = new List<string>();
-    List<string> SubType = new List<string>();
-    int counter = 0;
-    Type = Model.Type;
-    SubType = Model.Description;
-
-    for (int i = 0; i < Type.Count(); i++)
-    {
-        if (SubType[i] == "")
-        { 
-            <ul>@Type[i]</ul>
-        }
-
-        else if (SubType[i - 1] == "")
-        {
-            <ul> @Type[i]</ul>
-            <li>@SubType[i]</li>
-
-            int count = Type.Count() - (i + 1);
-            i++;
-            for (int y = 0; y < count; y++)
-            {
-                if (SubType[i] != "")
-                {
-                        <li>@SubType[i]</li>
-                    i++;
-                }
-
-                else
-                {
-                    i--;
-                    break;
-
-                }
-            }
-        }
-    }
-    }*@
 
 @if (ViewBag.Message != null)
 {

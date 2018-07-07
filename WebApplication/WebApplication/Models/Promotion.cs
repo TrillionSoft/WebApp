@@ -12,23 +12,16 @@ namespace WebApplication.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Product_Details
+    public partial class Promotion
     {
         public int ID { get; set; }
-        public Nullable<int> Product_ID { get; set; }
-        public string Code { get; set; }
-        public string Colour { get; set; }
-        public string Size { get; set; }
-        public string Length { get; set; }
+        public string Brand { get; set; }
+        public string Name { get; set; }
         public Nullable<decimal> Unit_Price { get; set; }
-        public Nullable<bool> Offer_Chk { get; set; }
+        public decimal Offer_Price { get; set; }
         public Nullable<decimal> Offer_Percentage { get; set; }
-        public Nullable<decimal> Offer_Price { get; set; }
-        public Nullable<decimal> Total_Price { get; set; }
-        public Nullable<bool> Deleted { get; set; }
         public string Offer_Until_Date { get; set; }
+        public Nullable<decimal> Total_Price { get; set; }
         public byte[] Image { get; set; }
-    
-        public virtual Product Product { get; set; }
     }
 }

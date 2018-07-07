@@ -1,0 +1,62 @@
+﻿@model WebApplication.Domain.PromotionDOM
+
+@*<div class="swing">
+<ul id="list">
+    <li class="show"><input type="text" name="fname" value=""></li>
+</ul>
+</div>
+<button id="add-to-list">Add a list item</button>
+<script>
+document.getElementById('add-to-list').onclick = function() {
+  var list = document.getElementById('list');
+  var newLI = document.createElement('li');
+  var newInput = document.createElement('input');
+  var newInput2 = document.createElement('input');
+
+  list.appendChild(newLI);
+  newLI.appendChild(newInput);
+  newLI.appendChild(newInput2);
+  setTimeout(function() {
+    newLI.className = newLI.className + " show";
+  }, 10);
+}
+</script>
+
+<style>
+.swing li {
+  list-style: none;
+  height: 0;
+  line-height: 2em;
+  margin: 0;
+  padding: 0 0.5em;
+  overflow: hidden;
+  width: 1000px;
+
+  transition: all 0.4s ease-out;
+  opacity: 0;
+  height: 2em;
+  
+}
+.swing li.show {
+  height: 2em;
+  margin: 2px 0;
+  opacity: 1;
+}
+</style>*@
+@* ----------------------------------------------------------------------------------------------------------------------------- *@
+
+@using (Ajax.BeginForm("AddPromotionProduct", "Promotion", new AjaxOptions() { HttpMethod = "POST" }, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="file" name="Image" accept=".png, .jpg, .jpeg" ><br>
+    @Html.TextBoxFor(m => m.Brand)
+    @Html.TextBoxFor(m => m.Name)
+    <input type="submit" value="Upload File to Server">
+}
+
+@{
+  //byte[] image = Model.Image;
+}
+
+@*<img src="data:image;base64,@System.Convert.ToBase64String(image)" width="400" height="500" />
+<p id="demo"></p>*@

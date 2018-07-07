@@ -8,11 +8,13 @@ using WebApplication.Domain;
 using WebApplication.Lib;
 using System.Web.Security;
 using System.Security.Principal;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
     public class HomeController : Controller
     {
+        DBEntities db = new DBEntities();
         UserDOM user = new UserDOM();
         ProductCategoryDOM product = new ProductCategoryDOM();
         UserDA userDA = new UserDA();
@@ -115,6 +117,12 @@ namespace WebApplication.Controllers
         public ActionResult Register()
         {
             return View();
+        }
+
+        public ActionResult Promotion()
+        {
+            var product = db.Promotions;
+            return View(product);
         }
     }
 }

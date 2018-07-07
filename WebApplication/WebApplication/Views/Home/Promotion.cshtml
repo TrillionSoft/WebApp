@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WebApplication.Models.Promotion>
+
+
+<div class="w3-row w3-grayscale">
+    @foreach (var s in Model)
+    {
+        <div class="w3-col l3 s6">
+            <div class="w3-display-container">
+                <div class="w3-display-container"> @*apply to all*@
+                    <img src="data:image;base64,@System.Convert.ToBase64String(s.Image)" style="width:100%">
+                    @if (s.Offer_Percentage <= 0)
+                    {
+                      <span class="w3-tag w3-display-topleft">New Arrial</span>
+                    }
+                    else
+                    {
+                      <span class="w3-tag w3-display-topleft">@String.Format("{0:N0}", s.Offer_Percentage) % Off</span>
+                    }
+
+                    <div class="w3-display-middle w3-display-hover">
+                        <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+                <p><b>@s.Name</b> <br>
+                @if (s.Offer_Percentage > 0)
+                {
+                   <b class="w3-text-grey" style="text-decoration: line-through;font-size:12px">RM @s.Unit_Price</b> <b id="@s.Name" style="font-size:12px;float:right;padding-right:2em"></b><br />
+                   <b class="w3-text-red">NOW RM @s.Total_Price</b>
+
+                }
+                else
+                {
+                    <b class="w3-text-black">RM @s.Unit_Price</b>
+                }
+                </p>
+
+            </div>
+       </div>
+
+    }
+</div>
+
+<script>
+    function setTimer(elem_id, date) {
+        var target_date = new Date(date).getTime();
+        var days, hours, minutes, seconds;
+        var countDownElem = document.getElementById(elem_id);
+        var x = setInterval(function () {
+            // find the amount of "seconds" between now and target
+            var current_date = new Date().getTime();
+            var seconds_left = (target_date - current_date) / 1000;
+
+            var distance = target_date - current_date;
+            // do some time calculations
+            days = parseInt(seconds_left / 86400);
+            seconds_left = seconds_left % 86400;
+            hours = parseInt(seconds_left / 3600);
+            seconds_left = seconds_left % 3600;
+            minutes = parseInt(seconds_left / 60);
+            seconds = parseInt(seconds_left % 60);
+            // format countdown string + set tag value
+            countDownElem.innerHTML = days + "d  " + hours + "h "
+             + minutes + "m " + seconds + "s ";
+
+            if (distance < 0) {
+                clearInterval(x);
+                countDownElem.innerHTML = "EXPIRED";
+            }
+        }, 1000);
+    }
+
+   
+
+</script>
+
+@foreach (var s in Model)
+{
+    <script>
+        if(@s.Offer_Until_Date != "" && @s.Offer_Percentage != 0)
+        setTimer("@s.Name", "@s.Offer_Until_Date");
+    </script>
+}
+
+

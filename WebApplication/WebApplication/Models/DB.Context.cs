@@ -30,5 +30,6 @@ namespace WebApplication.Models
         public virtual DbSet<Product_Details> Product_Details { get; set; }
         public virtual DbSet<Sub_Product_Category> Sub_Product_Category { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Promotion> Promotions { get; set; }
     }
 }
