@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/CSS/Roboto.css">
     @*<link rel="stylesheet" href="~/CSS/font-awesome.css>*@
 
-    @RenderSection("head", required: false)
+    @RenderSection("head", false)
     <style>
         .w3-sidebar a {
             font-family: "Roboto", sans-serif
@@ -31,6 +31,13 @@
             text-decoration: none;
             font-family: "Montserrat", sans-serif;
         }
+        .div-hover {
+            display: none;
+        }
+
+        .div-display:hover .div-hover{
+            display:block;
+        }    
     </style>
 
 </head>
@@ -110,7 +117,7 @@
 
 
         <!-- Image header -->
-        @{Html.RenderAction("Promotion", "Home");}
+        
         @*<div class="w3-display-container w3-container">
                 <img src="/w3images/jeans.jpg" alt="Jeans" style="width:100%">
                 <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
@@ -184,7 +191,7 @@
                 </div>
             </div>*@
 
-        <div class="w3-display-container w3-container">
+        <div class="w3-display-container ">
             <div style="position:sticky;top:0;overflow: hidden;background-color:white;width: 100%;">
                 <p class="w3-right w3-xlarge">
                     <span style="font-size:medium;font-weight:bold">
@@ -195,6 +202,9 @@
                     <i class="fa fa-search"></i>
                 </p>
             </div>
+
+            @{Html.RenderAction("Promotion", "Home");}
+
             @RenderBody()
         </div>
 
