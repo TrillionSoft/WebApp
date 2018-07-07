@@ -6,7 +6,7 @@
     {
         <div class="w3-col l3 s6">
             <div class="w3-display-container">
-                <div class="w3-display-container"> @*apply to all*@
+                <div class="div-display"> @*apply to all*@
                     <img src="data:image;base64,@System.Convert.ToBase64String(s.Image)" style="width:100%">
                     @if (s.Offer_Percentage <= 0)
                     {
@@ -17,7 +17,7 @@
                       <span class="w3-tag w3-display-topleft">@String.Format("{0:N0}", s.Offer_Percentage) % Off</span>
                     }
 
-                    <div class="w3-display-middle w3-display-hover">
+                    <div class="w3-display-middle div-hover">
                         <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
                     </div>
                 </div>
