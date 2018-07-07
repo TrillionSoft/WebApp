@@ -38,6 +38,12 @@
         .div-display:hover .div-hover{
             display:block;
         }    
+   
+        .navbar-fixed-top.scrolled {
+        background-color: #fff !important;
+        transition: background-color 200ms linear;
+        }
+  
     </style>
 
 </head>
@@ -192,8 +198,8 @@
             </div>*@
 
         <div class="w3-display-container ">
-            <div style="position:sticky;top:0;overflow: hidden;background-color:white;width: 100%;">
-                <p class="w3-right w3-xlarge">
+            <div class="navbar-fixed-top" style="position:sticky;top:0;overflow: hidden;background-color:white;width: 100%;z-index:2; background-color: rgba(255,255,255,0.5);">
+                <p class="w3-right" style="height:auto">
                     <span style="font-size:medium;font-weight:bold">
                         @Html.ActionLink("Login", "Login", "Home", null, new { @class = "w3-button", hidefocus = "hidefocus" })
                         @Html.ActionLink("Register", "Register", "Home", null, new { @class = "w3-button", hidefocus = "hidefocus" })
@@ -309,6 +315,8 @@
             document.getElementById("myOverlay").style.display = "none";
         }
     </script>
+   
+
     @RenderSection("footer", false)
 </body>
 </html>
