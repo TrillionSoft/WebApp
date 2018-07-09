@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="ShoppingDBModel.Product">
         <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="PC_ID" ColumnName="PC_ID" />
           <ScalarProperty Name="SPC_ID" ColumnName="SPC_ID" />
@@ -29,6 +30,8 @@
     <EntitySetMapping Name="Product_Details">
       <EntityTypeMapping TypeName="ShoppingDBModel.Product_Details">
         <MappingFragment StoreEntitySet="Product_Details">
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Offer_Until_Date" ColumnName="Offer_Until_Date" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -62,6 +65,21 @@
           <ScalarProperty Name="LoginID" ColumnName="LoginID" />
           <ScalarProperty Name="LoginPassword" ColumnName="LoginPassword" />
           <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Promotions">
+      <EntityTypeMapping TypeName="ShoppingDBModel.Promotion">
+        <MappingFragment StoreEntitySet="Promotion">
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+          <ScalarProperty Name="Offer_Until_Date" ColumnName="Offer_Until_Date" />
+          <ScalarProperty Name="Offer_Percentage" ColumnName="Offer_Percentage" />
+          <ScalarProperty Name="Offer_Price" ColumnName="Offer_Price" />
+          <ScalarProperty Name="Unit_Price" ColumnName="Unit_Price" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

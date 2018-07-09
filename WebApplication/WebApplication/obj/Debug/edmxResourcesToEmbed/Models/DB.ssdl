@@ -8,6 +8,7 @@
     <Property Name="PC_ID" Type="int" />
     <Property Name="SPC_ID" Type="int" />
     <Property Name="Brand" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="Description" Type="varchar" MaxLength="50" />
     <Property Name="Production_Country" Type="varchar" MaxLength="50" />
     <Property Name="Material" Type="varchar" MaxLength="50" />
@@ -37,8 +38,24 @@
     <Property Name="Offer_Chk" Type="bit" />
     <Property Name="Offer_Percentage" Type="decimal" Precision="18" Scale="2" />
     <Property Name="Offer_Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Offer_Until_Date" Type="varchar" MaxLength="50" />
     <Property Name="Total_Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Image" Type="varbinary(max)" />
     <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <EntityType Name="Promotion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Brand" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Unit_Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Offer_Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Offer_Percentage" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Offer_Until_Date" Type="varchar" MaxLength="50" />
+    <Property Name="Total_Price" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Image" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="Sub_Product_Category">
     <Key>
@@ -87,6 +104,7 @@
     <EntitySet Name="Product" EntityType="Self.Product" Schema="cj" store:Type="Tables" />
     <EntitySet Name="Product_Category" EntityType="Self.Product_Category" Schema="cj" store:Type="Tables" />
     <EntitySet Name="Product_Details" EntityType="Self.Product_Details" Schema="cj" store:Type="Tables" />
+    <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="cj" store:Type="Tables" />
     <EntitySet Name="Sub_Product_Category" EntityType="Self.Sub_Product_Category" Schema="cj" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="cj" store:Type="Tables" />
     <AssociationSet Name="FK_Product_Details_Product" Association="Self.FK_Product_Details_Product">

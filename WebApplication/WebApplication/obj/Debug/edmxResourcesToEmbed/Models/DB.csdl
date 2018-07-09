@@ -14,6 +14,7 @@
     <Property Name="Deleted" Type="Boolean" />
     <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
     <NavigationProperty Name="Product_Details" Relationship="ShoppingDBModel.FK_Product_Details_Product" FromRole="Product" ToRole="Product_Details" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Product_Category">
     <Key>
@@ -42,6 +43,8 @@
     <Property Name="Total_Price" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="Deleted" Type="Boolean" />
     <NavigationProperty Name="Product" Relationship="ShoppingDBModel.FK_Product_Details_Product" FromRole="Product_Details" ToRole="Product" />
+    <Property Name="Offer_Until_Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Sub_Product_Category">
     <Key>
@@ -77,6 +80,7 @@
       <End Role="Product_Category" EntitySet="Product_Category" />
       <End Role="Sub_Product_Category" EntitySet="Sub_Product_Category" />
     </AssociationSet>
+    <EntitySet Name="Promotions" EntityType="ShoppingDBModel.Promotion" />
   </EntityContainer>
   <Association Name="FK_Product_Details_Product">
     <End Type="ShoppingDBModel.Product" Role="Product" Multiplicity="0..1" />
@@ -102,4 +106,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="Promotion">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Unit_Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Offer_Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Offer_Percentage" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Offer_Until_Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Total_Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
 </Schema>

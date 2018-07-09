@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.4.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -97,6 +98,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\themify-icons.css" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\plugins.js" />
+    <Content Include="assets\js\vendor\jquery-2.1.4.min.js" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
@@ -159,22 +167,29 @@
     <Content Include="CSS\Roboto.css" />
     <Content Include="CSS\w3.css" />
     <Content Include="Global.asax" />
+    <Content Include="images\admin.jpg" />
     <Content Include="obj\Debug\TempPE\New Text Document.txt" />
     <Content Include="obj\Debug\WebApplication.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\WebApplication.dll" />
     <Content Include="obj\Debug\WebApplication.pdb" />
+    <Content Include="Upload\jeans1.jpg" />
+    <Content Include="Upload\jeans2.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\PromotionController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="DA\ProductCategoryDA.cs" />
     <Compile Include="DA\ProductDA.cs" />
+    <Compile Include="DA\PromotionDA.cs" />
     <Compile Include="DA\UserDA.cs" />
     <Compile Include="Domain\ProductCategoryDOM.cs" />
     <Compile Include="Domain\ProductDOM.cs" />
+    <Compile Include="Domain\PromotionDOM.cs" />
+    <Compile Include="Domain\PromotionPostDOM.cs" />
     <Compile Include="Domain\UserDOM.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -202,6 +217,9 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product_Details.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Promotion.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sub_Product_Category.cs">
@@ -254,11 +272,13 @@
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
-    <Content Include="Views\Product\AddProduct.cshtml" />
+    <Content Include="Views\Promotion\AddPromotionProduct.cshtml" />
     <Content Include="Views\Test\Create.cshtml" />
     <Content Include="Views\Test\Retrive.cshtml" />
     <Content Include="Views\Test\RetriveDetails.cshtml" />
     <Content Include="Views\Test\Edit.cshtml" />
+    <Content Include="Views\Home\Promotion.cshtml" />
+    <Content Include="Views\Admin\Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
