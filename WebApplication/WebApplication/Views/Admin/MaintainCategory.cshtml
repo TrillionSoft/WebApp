@@ -3,39 +3,81 @@
     Layout = "~/Views/Layout/_AdminLayout.cshtml";
 }
 
-@using (Ajax.BeginForm(null, null, null, new AjaxOptions
-{
-    HttpMethod = "Get",
-    UpdateTargetId = "target",
-    OnSuccess = "highlight"
-}))
-{
-    <div style="float:right;padding-right:30px;padding-bottom:15px">
-        @Html.Label("Keyword : ")
-        @Html.TextBox("Type", null, new { autofocus = "", autocomplete = "off" })
+    @using (Ajax.BeginForm(null, null, null, new AjaxOptions
+    {
+        HttpMethod = "Get",
+        UpdateTargetId = "target",
+        LoadingElementId = "loader",
+        OnSuccess = "highlight"
+    }))
+    {
+        <div style="float:right;padding-right:30px;padding-bottom:30px;padding-top:50px">
+            <i class="fa fa-search" style="padding-right:10px"></i> @Html.TextBox("Type", null, new { autofocus = "", autocomplete = "off", placeholder = "Search Here" })
+            <img src="~/images/loader-16.gif" id="loader" style="display: none" />
+        </div>
+    }
+    <button class="newButton" style="margin-left:25px;margin-top:50px"><span>Add New Product</span></button>
+
+    <br />
+
+    <div id="target">
+        @Html.Partial("_SearchCategory")
     </div>
-}
 
-<br />
+    @section footer {
+        <script>
+            function highlight() {
+                var type = $("#Type").val();
 
-<div id="target">
-    @Html.Partial("_SearchCategory")
-</div>
+                if (type.trim()) {
+                    var re = new RegExp("(" + type + ")", "gi");
 
-@section footer {
-    <script>
-        function highlight() {
-            var type = $("#Type").val();
-
-            if (type.trim()) {
-                var re = new RegExp("(" + type +")", "gi");
-
-                $("tr").find("td:nth(1)").each(function () {
-                    var html = $(this).html().replace(re, "<b>$1</b>");
-                    $(this).html(html);
-                });
+                    $("tr").find("td:nth(1)").each(function () {
+                        var html = $(this).html().replace(re, "<b style='color:red'>$1</b>");
+                        $(this).html(html);
+                    });
+                }
             }
-        }
-    </script>
+        </script>
+    }
+
+<style>
+  .newButton{
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #4b908f;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  padding:10px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  }
+
+  .newButton span:after {
+  content: '+';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
 }
 
+  
+.newButton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.newButton:hover span {
+  padding-right: 25px;
+}
+
+.newButton:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
