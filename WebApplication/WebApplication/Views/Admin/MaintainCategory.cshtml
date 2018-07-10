@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Maintain Category";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+@using (Ajax.BeginForm(null, null, null, new AjaxOptions
+{
+    HttpMethod = "Get",
+    UpdateTargetId = "target",
+    OnSuccess = "highlight"
+}))
+{
+    <div style="float:right;padding-right:30px;padding-bottom:15px">
+        @Html.Label("Keyword : ")
+        @Html.TextBox("Type", null, new { autofocus = "", autocomplete = "off" })
+    </div>
+}
+
+<br />
+
+<div id="target">
+    @Html.Partial("_SearchCategory")
+</div>
+
+@section footer {
+    <script>
+        function highlight() {
+            var type = $("#Type").val();
+
+            if (type.trim()) {
+                var re = new RegExp("(" + type +")", "gi");
+
+                $("tr").find("td:nth(1)").each(function () {
+                    var html = $(this).html().replace(re, "<b>$1</b>");
+                    $(this).html(html);
+                });
+            }
+        }
+    </script>
+}
+

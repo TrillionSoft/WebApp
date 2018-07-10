@@ -46,7 +46,10 @@
 
                     <h3 class="menu-title">Category</h3>
                     <li>
-                        <a href="#"> <i class="menu-icon fa fa-tasks"></i>Maintain Category</a>
+                        <a href="/Admin/MaintainCategory"> 
+                            <i class="menu-icon fa fa-tasks">
+                            </i>Maintain Category
+                        </a>
                     </li>
                     <li>
                         <a href="#"> <i class="menu-icon ti-email"></i>Maintain S-Category</a>
@@ -185,7 +188,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Dashboard</h1>
+                        <h3>@ViewBag.Title</h3>
                     </div>
                 </div>
             </div>
@@ -194,14 +197,21 @@
         <div class="content mt-3" style="padding-left:2%; clear:both">
             @RenderBody()
             @* Content *@
+
+
         </div>
     </div>
-
+    <script src="~/Script/jquery-3.1.1.min.js"></script>
+    <script src="~/Script/jquery.validate.min.js"></script>
+    <script src="~/Script/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Script/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Script/Site.js"></script>
 
     <script src="/assets/js/vendor/jquery-2.1.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <script src="/assets/js/plugins.js"></script>
     <script src="/assets/js/main.js"></script>
+   
     @RenderSection("footer", false)
 </body>
 </html>

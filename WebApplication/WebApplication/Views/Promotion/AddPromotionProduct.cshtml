@@ -1,6 +1,6 @@
 ﻿@model WebApplication.Domain.PromotionDOM
 
-@*<div class="swing">
+<div class="swing">
 <ul id="list">
     <li class="show"><input type="text" name="fname" value=""></li>
 </ul>
@@ -42,7 +42,7 @@ document.getElementById('add-to-list').onclick = function() {
   margin: 2px 0;
   opacity: 1;
 }
-</style>*@
+</style>
 @* ----------------------------------------------------------------------------------------------------------------------------- *@
 
 @using (Ajax.BeginForm("AddPromotionProduct", "Promotion", new AjaxOptions() { HttpMethod = "POST" }, new { enctype = "multipart/form-data" }))
