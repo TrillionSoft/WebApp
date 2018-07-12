@@ -6,7 +6,8 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Type</th>
+                <th width="300px">Type</th>
+                <th >Description</th>
                 <th></th>
             </tr>
         </thead>
@@ -18,8 +19,9 @@
                 <tr>
                     <td>@s.ID</td>
                     <td>@s.Type</td>
+                    <td>@s.Description</td>
                     <td class='select'>
-                        <a class="button1">Edit<i class="fa fa-pencil" style="padding-left:10px"></i></a>
+                        <a class="button1" onclick="location.href='@Url.Action("EditCategory", "Admin", new { id = s.ID })'">Edit <i class="fa fa-pencil" style="padding-left:10px"></i></a>
                         <a class="button1">Delete <i class="fa fa-recycle" style="padding-left:10px"></i></a>
 
                     </td>
@@ -52,6 +54,7 @@ table{
 
 tr, td, tbody, tfoot {
   display: block;
+  text-align:center;
 }
 
 thead {
@@ -60,6 +63,7 @@ thead {
 
 tr {
   padding-bottom: 10px;
+
 }
 
 td {

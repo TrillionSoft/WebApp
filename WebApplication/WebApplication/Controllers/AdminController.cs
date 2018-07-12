@@ -34,5 +34,27 @@ namespace WebApplication.Controllers
             }
             return View(Category); // Return entire
         }
+
+        public ActionResult EditCategory(int id)
+        {
+            CategoryModel category = new CategoryModel();
+            category.Main_Category = db.Product_Category.Find(id);
+            category.Sub_Category = db.Sub_Product_Category.Where(e => e.PC_ID == id).ToList();
+
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult EditCategory(CategoryModel category)
+        {
+            var mainCategory = db.Product_Category.Find(category.Main_Category.ID);
+            mainCategory.Type = category.Main_Category.Type;
+            mainCategory.Description = category.Main_Category.Description;
+
+
+            db.SaveChanges();
+
+            return RedirectToAction("MaintainProduct");
+        }
     }
 }

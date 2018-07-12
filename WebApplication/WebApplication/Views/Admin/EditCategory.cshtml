@@ -1,0 +1,78 @@
+﻿@model WebApplication.Models.CategoryModel
+
+@{
+    ViewBag.Title = "Edit Category";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm(new {Id =  }))
+{
+    <div style="padding-top:50px">
+    
+    <b style="padding-left:20px;text-decoration:underline">Main Category</b><br /><br />
+    <span style="padding-right:55px;padding-left:20px">@Html.LabelFor(m => Model.Main_Category.Type) </span><span>:@Html.TextBoxFor(m => Model.Main_Category.Type)</span></div>
+    <div>
+    <span style="padding-right:5px;padding-left:20px">@Html.LabelFor(m => Model.Main_Category.Description)</span> <span>:@Html.TextBoxFor(m => Model.Main_Category.Description)</span>
+    </div><br/>
+
+
+    <b style="padding-left:20px;text-decoration:underline">Sub Category</b><br /><br />
+     <span style="padding-left:90px">Type</span>    <span style="padding-left:160px">Description</span> 
+    <div class="swing">
+            <ul id="list">
+                @foreach (var s in Model.Sub_Category)
+                {
+                <li class="show">
+                <input style="margin-left:15px;" type="text" name="fname" value="@s.Type">
+                <input style="margin-left:5px" type="text" name="fname" value="@s.Description">
+                </li>
+
+                }
+                
+            </ul>
+        </div>
+
+    <button type="submit" class="button special">Save</button>
+}
+
+<button id="add-to-list">Add a list item</button>
+
+<script>
+document.getElementById('add-to-list').onclick = function() {
+  var list = document.getElementById('list');
+  var newLI = document.createElement('li');
+  var newInput = document.createElement('input');
+  var newInput2 = document.createElement('input');
+
+  newInput.style.cssText = 'margin-left:15px';
+  newInput2.style.cssText = 'margin-left:10px';
+
+  list.appendChild(newLI);
+  newLI.appendChild(newInput);
+  newLI.appendChild(newInput2);
+  setTimeout(function() {
+    newLI.className = newLI.className + " show1";
+  }, 10);
+}
+</script>
+
+<style>
+    .swing li {
+        list-style: none;
+        height: 0;
+        line-height: 2em;
+        margin: 0;
+        padding: 0 0.5em;
+        overflow: hidden;
+        width: 1000px;
+        transition: all 0.4s ease-out;
+        opacity: 0;
+        height: 2em;
+    }
+
+        .swing li.show,.swing li.show1 {
+            height: 2em;
+            margin: 2px 0;
+            opacity: 1;
+        }
+</style>
