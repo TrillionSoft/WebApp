@@ -50,11 +50,35 @@ namespace WebApplication.Controllers
             var mainCategory = db.Product_Category.Find(category.Main_Category.ID);
             mainCategory.Type = category.Main_Category.Type;
             mainCategory.Description = category.Main_Category.Description;
-
-
             db.SaveChanges();
+            try
+            {
+                for (int i = 0; i < category.Sub_Category.Count(); i++)
+                {
+                    var subCategory = db.Sub_Product_Category.Find(category.Sub_Category[i].ID);
+                    subCategory.Type = category.Sub_Category[i].Type;
+                    subCategory.Description = category.Sub_Category[i].Description;
+                    db.SaveChanges();
+                }
 
-            return RedirectToAction("MaintainProduct");
+                for (int i = 0; i < category.New_Sub_Category.Count(); i++)
+                {
+                    var NewSubCategory = new Sub_Product_Category
+                    {
+                        PC_ID = category.Main_Category.ID,
+                        Type = category.New_Sub_Category[i].Type,
+                        Description = category.New_Sub_Category[i].Description
+                    };
+                    db.Sub_Product_Category.Add(NewSubCategory);
+                    db.SaveChanges();
+                }
+            }catch(Exception ex)
+            {
+               
+            }
+           
+
+            return RedirectToAction("MaintainCategory");
         }
     }
 }
