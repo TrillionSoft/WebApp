@@ -40,10 +40,12 @@
 <button id="add-to-list">Add a list item</button>
 
 <script>
+ var counter = 0;
 document.getElementById('add-to-list').onclick = function () {
     var list = document.getElementById('list');
     var newLI = document.createElement('li');
-    $("#list").append(' <li class="show">@(Html.TextBoxFor(m => Model.New_Sub_Category[0].Type)) @(Html.TextBoxFor(m => Model.New_Sub_Category[0].Description)) <a class="button1" id="New_BTN-@Model.New_Sub_Category[]"><i class="fa fa-minus"></i></a>');
+    counter++;
+    $("#list").append(' <li class="show"  id= li-New-' + counter + '>@(Html.TextBoxFor(m => Model.New_Sub_Category[0].Type)) @(Html.TextBoxFor(m => Model.New_Sub_Category[0].Description)) <a class="button1" onclick="RemoveNewOnClick('+counter+')" id=New_BTN-' + counter + '><i class="fa fa-minus"></i></a> ');
 }
 
 function RemoveOnClick(ID,counter) {
@@ -52,6 +54,14 @@ function RemoveOnClick(ID,counter) {
     $('#'+deleted).val('true');
     $('#'+li).hide()
 }
+
+function RemoveNewOnClick(ID) {
+    var li = 'li-New-' + ID
+    //var deleted = 'New_Sub_Category_' + counter + '__Deleted';
+    //$('#' + deleted).val('true');
+    $('#' + li).remove();
+}
+
 
 </script>
 
