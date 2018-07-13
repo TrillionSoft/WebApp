@@ -1,9 +1,8 @@
 ﻿@model WebApplication.Models.CategoryModel
 
 @{
-    ViewBag.Title = "Edit Category";
-    Layout = "~/Views/Layout/_AdminLayout.cshtml";
-
+        ViewBag.Title = "Edit Category";
+        Layout = "~/Views/Layout/_AdminLayout.cshtml";
 }
 
 @using (Html.BeginForm())
@@ -44,8 +43,10 @@
 document.getElementById('add-to-list').onclick = function () {
     var list = document.getElementById('list');
     var newLI = document.createElement('li');
+    
+    @*$("#list").append(' <li class="show"  id= li-New-' + counter + '>@(Html.TextBoxFor(m => Model.New_Sub_Category[num].Type)) @(Html.TextBoxFor(m => Model.New_Sub_Category[num].Description)) <a class="button1" onclick="RemoveNewOnClick('+counter+')" id=New_BTN-' + counter + '><i class="fa fa-minus"></i></a> ');*@
+    $("#list").append(' <li class="show"  id= li-New-' + counter + '> <input id="New_Sub_Category['+counter+'].Type" name="New_Sub_Category['+counter+'].Type" type="text" value /> <input id="New_Sub_Category['+counter+'.Description" name="New_Sub_Category['+counter+'].Description" type="text" value /> <a class="button1" onclick="RemoveNewOnClick(' + counter + ')" id=New_BTN-' + counter + '><i class="fa fa-minus"></i></a> ');
     counter++;
-    $("#list").append(' <li class="show"  id= li-New-' + counter + '>@(Html.TextBoxFor(m => Model.New_Sub_Category[0].Type)) @(Html.TextBoxFor(m => Model.New_Sub_Category[0].Description)) <a class="button1" onclick="RemoveNewOnClick('+counter+')" id=New_BTN-' + counter + '><i class="fa fa-minus"></i></a> ');
 }
 
 function RemoveOnClick(ID,counter) {
@@ -54,6 +55,8 @@ function RemoveOnClick(ID,counter) {
     $('#'+deleted).val('true');
     $('#'+li).hide()
 }
+//<input id="New_Sub_Category_0__Type" name="New_Sub_Category[0].Type" type="text" value />
+//<input id="New_Sub_Category_0__Description" name="New_Sub_Category[0].Description" type="text" value />
 
 function RemoveNewOnClick(ID) {
     var li = 'li-New-' + ID
