@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication.Models;
+using PagedList;
 
 namespace WebApplication.Controllers
 {
@@ -23,14 +24,35 @@ namespace WebApplication.Controllers
         }
 
         
-        public ActionResult MaintainCategory(string type)
+        public ActionResult MaintainCategory(string type, int page = 1)
         {
-           var Category = db.Product_Category;           
+            if (page < 1)
+            {
+                // Goto First Page
+                return RedirectToAction(null, new { page = 1 });
+            }
+
+            var Category = db.Product_Category.OrderBy(c => c.ID).ToPagedList(page, 2);
+
+            if (page > Category.PageCount)
+            {
+                return RedirectToAction(null, new { page = Category.PageCount });
+            }
+
             if (Request.IsAjaxRequest())
             {
                 var Specific_Category = db.Product_Category.Where(o => o.Type.Contains(type));
                 System.Threading.Thread.Sleep(1000); // Sleep 1 second
-                return PartialView("_SearchCategory", Specific_Category); // Return partial
+                
+                if(type != null)
+                {
+                    return PartialView("_SearchCategory", Specific_Category); // Return partial and search
+                }
+                else
+                {
+                    return PartialView("_SearchCategory", Category); //Return partial and page
+                }
+
             }
             return View(Category); // Return entire
         }
