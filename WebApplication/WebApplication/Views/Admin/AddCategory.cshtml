@@ -1,0 +1,92 @@
+﻿@model WebApplication.Models.CategoryModel
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Views/Layout/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div style="padding-top:50px">
+        @Html.HiddenFor(m => Model.Main_Category.ID)
+        <b style="padding-left:20px;text-decoration:underline">Main Category</b><br /><br />
+        <span style="padding-right:55px;padding-left:20px">@Html.LabelFor(m => Model.Main_Category.Type) </span><span>:@Html.TextBoxFor(m => Model.Main_Category.Type)</span>
+    </div>
+    <div>
+        <span style="padding-right:5px;padding-left:20px">@Html.LabelFor(m => Model.Main_Category.Description)</span> <span>:@Html.TextBoxFor(m => Model.Main_Category.Description)</span>
+    </div><br />
+
+
+    <b style="padding-left:20px;text-decoration:underline">Sub Category</b><br /><br />
+    <span style="padding-left:90px">Type</span> <span style="padding-left:160px">Description</span>
+    <div class="swing">
+        <ul id="list">
+                
+        </ul>
+    </div>
+
+    <button type="submit" class="button special">Save</button>
+}
+
+<button id="add-to-list">Add a list item</button>
+
+<script>
+ var counter = 0;
+document.getElementById('add-to-list').onclick = function () {
+    var list = document.getElementById('list');
+    var newLI = document.createElement('li');
+
+    @*$("#list").append(' <li class="show"  id= li-New-' + counter + '>@(Html.TextBoxFor(m => Model.New_Sub_Category[num].Type)) @(Html.TextBoxFor(m => Model.New_Sub_Category[num].Description)) <a class="button1" onclick="RemoveNewOnClick('+counter+')" id=New_BTN-' + counter + '><i class="fa fa-minus"></i></a> ');*@
+    $("#list").append(' <li class="show"  id= li-New-' + counter + '> <input id="New_Sub_Category['+counter+'].Type" name="New_Sub_Category['+counter+'].Type" type="text" value /> <input id="New_Sub_Category['+counter+'.Description" name="New_Sub_Category['+counter+'].Description" type="text" value /> <a class="button1" onclick="RemoveNewOnClick(' + counter + ')" id=New_BTN-' + counter + '><i class="fa fa-minus"></i></a> ');
+    counter++;
+}
+
+function RemoveOnClick(ID,counter) {
+    var li = 'li-' + ID
+    var deleted = 'Sub_Category_'+ counter +'__Deleted';
+    $('#'+deleted).val('true');
+    $('#'+li).hide()
+}
+//<input id="New_Sub_Category_0__Type" name="New_Sub_Category[0].Type" type="text" value />
+//<input id="New_Sub_Category_0__Description" name="New_Sub_Category[0].Description" type="text" value />
+
+function RemoveNewOnClick(ID) {
+    var li = 'li-New-' + ID
+    //var deleted = 'New_Sub_Category_' + counter + '__Deleted';
+    //$('#' + deleted).val('true');
+    $('#' + li).remove();
+}
+
+
+</script>
+
+<style>
+    .swing li {
+        list-style: none;
+        height: 0;
+        line-height: 2em;
+        margin: 0;
+        padding: 0 0.5em;
+        overflow: hidden;
+        width: 1000px;
+        transition: all 0.4s ease-out;
+        opacity: 0;
+        height: 2em;
+    }
+
+        .swing li.show, .swing li.show1 {
+            height: 2em;
+            margin: 2px 0;
+            opacity: 1;
+        }
+
+    .button1 {
+        font-size: 1rem;
+        text-decoration: none;
+        border-radius: 2px;
+        color: #fff;
+        padding: 4px;
+        background-color: #4b908f;
+        cursor: pointer;
+    }
+</style>
+

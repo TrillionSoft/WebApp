@@ -105,6 +105,13 @@
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\plugins.js" />
     <Content Include="assets\js\vendor\jquery-2.1.4.min.js" />
+    <Content Include="bin\DevExpress.Dashboard.v17.1.Core.dll" />
+    <Content Include="bin\DevExpress.Data.v17.1.dll" />
+    <Content Include="bin\DevExpress.DataAccess.v17.1.dll" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\EntityFramework.xml" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
@@ -168,10 +175,22 @@
     <Content Include="CSS\w3.css" />
     <Content Include="Global.asax" />
     <Content Include="images\admin.jpg" />
+    <Content Include="images\loader-16.gif" />
     <Content Include="obj\Debug\TempPE\New Text Document.txt" />
     <Content Include="obj\Debug\WebApplication.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\WebApplication.dll" />
     <Content Include="obj\Debug\WebApplication.pdb" />
+    <Content Include="Script\jquery-3.1.1.js" />
+    <Content Include="Script\jquery-3.1.1.min.js" />
+    <Content Include="Script\jquery-3.1.1.slim.js" />
+    <Content Include="Script\jquery-3.1.1.slim.min.js" />
+    <Content Include="Script\jquery.unobtrusive-ajax.js" />
+    <Content Include="Script\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Script\jquery.validate.js" />
+    <Content Include="Script\jquery.validate.min.js" />
+    <Content Include="Script\jquery.validate.unobtrusive.js" />
+    <Content Include="Script\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Script\Site.js" />
     <Content Include="Upload\jeans1.jpg" />
     <Content Include="Upload\jeans2.jpg" />
     <Content Include="Web.config" />
@@ -190,6 +209,7 @@
     <Compile Include="Domain\ProductDOM.cs" />
     <Compile Include="Domain\PromotionDOM.cs" />
     <Compile Include="Domain\PromotionPostDOM.cs" />
+    <Compile Include="Domain\SubProductCategory.cs" />
     <Compile Include="Domain\UserDOM.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -228,6 +248,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
@@ -266,6 +287,10 @@
       <DependentUpon>DB.edmx</DependentUpon>
       <LastGenOutput>DB.cs</LastGenOutput>
     </Content>
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DB.csdl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DB.msl" />
+    <Content Include="obj\Debug\edmxResourcesToEmbed\Models\DB.ssdl" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
     <None Include="packages.config" />
     <Content Include="Views\Layout\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -279,6 +304,12 @@
     <Content Include="Views\Test\Edit.cshtml" />
     <Content Include="Views\Home\Promotion.cshtml" />
     <Content Include="Views\Admin\Home.cshtml" />
+    <Content Include="Views\Admin\_SearchCategory.cshtml" />
+    <Content Include="Views\Admin\EditCategory.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\MaintainCategory.cshtml" />
+    <Content Include="Views\Layout\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\AddCategory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -291,6 +322,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

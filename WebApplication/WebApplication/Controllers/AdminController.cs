@@ -95,5 +95,38 @@ namespace WebApplication.Controllers
 
             return RedirectToAction("MaintainCategory");
         }
+
+        public ActionResult AddCategory()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddCategory(CategoryModel category)
+        {
+            var Pcategory = new Product_Category
+            {
+                Type = category.Main_Category.Type,
+                Description = category.Main_Category.Description
+            };
+            db.Product_Category.Add(Pcategory);
+            db.SaveChanges();
+
+            int id = Pcategory.ID;
+
+            for (int i = 0; i < category.New_Sub_Category.Count(); i++)
+            {
+                var NewSubCategory = new Sub_Product_Category
+                {
+                    PC_ID = id,
+                    Type = category.New_Sub_Category[i].Type,
+                    Description = category.New_Sub_Category[i].Description
+                };
+                db.Sub_Product_Category.Add(NewSubCategory);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("MaintainCategory");
+        }
     }
 }

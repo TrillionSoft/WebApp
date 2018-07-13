@@ -10,13 +10,14 @@
         LoadingElementId = "loader",
         OnSuccess = "highlight"
     }))
-    {
+    {   
         <div style="float:right;padding-right:30px;padding-bottom:30px;padding-top:50px">
             <i class="fa fa-search" style="padding-right:10px"></i> @Html.TextBox("Type", null, new { autofocus = "", autocomplete = "off", placeholder = "Search Here" })
             <img src="~/images/loader-16.gif" id="loader" style="display: none" />
         </div>
     }
-    <button class="newButton" style="margin-left:25px;margin-top:50px"><span>Add New Category</span></button>
+    @*<button class="newButton" style="margin-left:25px;margin-top:50px"><span>Add New Category</span></button>*@
+    @Html.ActionLink("Add New Category", "AddCategory", null, new { @class = "newButton", style = "margin-left:25px;margin-top:50px" })
 
     <br />
 

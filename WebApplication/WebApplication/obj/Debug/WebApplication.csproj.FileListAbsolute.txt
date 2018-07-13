@@ -124,10 +124,6 @@ C:\Users\jcfcyc\Desktop\WebApp.git\trunk\WebApplication\WebApplication\obj\Debug
 C:\Users\jcfcyc\Desktop\WebApp.git\trunk\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.CopyComplete
 C:\Users\jcfcyc\Desktop\WebApp.git\trunk\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 C:\Users\jcfcyc\Desktop\WebApp.git\trunk\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
-C:\Users\jcfcyc\Desktop\WebApp.git\trunk\WebApplication\WebApplication\bin\EntityFramework.dll
-C:\Users\jcfcyc\Desktop\WebApp.git\trunk\WebApplication\WebApplication\bin\EntityFramework.SqlServer.dll
-C:\Users\jcfcyc\Desktop\WebApp.git\trunk\WebApplication\WebApplication\bin\EntityFramework.xml
-C:\Users\jcfcyc\Desktop\WebApp.git\trunk\WebApplication\WebApplication\bin\EntityFramework.SqlServer.xml
 C:\Users\jcfcyc\Desktop\WebApp.git\trunk\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
 C:\Users\User\Desktop\ShoppingWeb\trunk\WebApplication\WebApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\User\Desktop\ShoppingWeb\trunk\WebApplication\WebApplication\bin\roslyn\Microsoft.CodeAnalysis.dll
@@ -187,3 +183,6 @@ C:\Users\User\Desktop\ShoppingWeb\trunk\WebApplication\WebApplication\bin\Entity
 C:\Users\User\Desktop\ShoppingWeb\trunk\WebApplication\WebApplication\obj\Debug\WebApplication.dll
 C:\Users\User\Desktop\ShoppingWeb\trunk\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
 C:\Users\User\Desktop\ShoppingWeb\trunk\WebApplication\WebApplication\obj\Debug\WebApplication.csprojResolveAssemblyReference.cache
+C:\Users\jcfcyc\Desktop\WebApp.git\trunk\WebApplication\WebApplication\obj\Debug\WebApplication.dll.licenses
+C:\Users\jcfcyc\Desktop\WebApp.git\trunk\WebApplication\WebApplication\bin\EntityFramework.xml
+C:\Users\jcfcyc\Desktop\WebApp.git\trunk\WebApplication\WebApplication\bin\EntityFramework.SqlServer.xml
