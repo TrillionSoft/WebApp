@@ -54,11 +54,19 @@ namespace WebApplication.Controllers
             try
             {
                 for (int i = 0; i < category.Sub_Category.Count(); i++)
-                {
-                    var subCategory = db.Sub_Product_Category.Find(category.Sub_Category[i].ID);
-                    subCategory.Type = category.Sub_Category[i].Type;
-                    subCategory.Description = category.Sub_Category[i].Description;
-                    db.SaveChanges();
+                {   if (category.Sub_Category[i].Deleted == true)
+                    {
+                        var subCategory = db.Sub_Product_Category.Find(category.Sub_Category[i].ID);
+                        db.Sub_Product_Category.Remove(subCategory);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        var subCategory = db.Sub_Product_Category.Find(category.Sub_Category[i].ID);
+                        subCategory.Type = category.Sub_Category[i].Type;
+                        subCategory.Description = category.Sub_Category[i].Description;
+                        db.SaveChanges();
+                    }
                 }
 
                 for (int i = 0; i < category.New_Sub_Category.Count(); i++)
