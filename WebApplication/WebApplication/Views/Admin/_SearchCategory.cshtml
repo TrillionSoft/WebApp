@@ -1,6 +1,5 @@
 ﻿@using PagedList
 @using PagedList.Mvc
-
 @model IPagedList<WebApplication.Models.Product_Category>
 
 <main>
@@ -28,33 +27,25 @@
 
                     </td>
                 </tr>
-            }
+                }
                 </tr>
             </tbody>
         </table>
+    @{ 
+        var options = PagedListRenderOptions.Classic;
+        //options.LinkToFirstPageFormat = ">";
+        //options.LinkToLastPageFormat = "Last";
+        options.LinkToPreviousPageFormat = "<";
+        options.LinkToNextPageFormat = ">";
 
-        @{
-            var options = PagedListRenderOptions.ClassicPlusFirstAndLast;
-            options.LinkToFirstPageFormat = "First";
-            options.LinkToLastPageFormat = "Last";
-            options.LinkToPreviousPageFormat = "Previous";
-            options.LinkToNextPageFormat = "Next";
-
-            var ajaxOption = new AjaxOptions { UpdateTargetId = "target" };
-        }
-
-        @Html.PagedListPager(
-            Model,
-            n => "?page=" + n,
-            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(options, ajaxOption)
-        )
-
-    <p>
-    Page @Model.PageNumber of @Model.PageCount<br />
-    Showing @Model.Count of @Model.TotalItemCount record(s)<br />
-    From record @Model.FirstItemOnPage to @Model.LastItemOnPage<br />
-</p>
-
+        var ajaxOption = new AjaxOptions { UpdateTargetId = "target", OnSuccess = "highlight" };
+    }   
+          @Html.PagedListPager(Model, n => "?page=" + n + "&Type="+Request.QueryString["Type"], PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(options, ajaxOption))
+        <p>
+            Page @Model.PageNumber of @Model.PageCount<br />
+            Showing @Model.Count of @Model.TotalItemCount record(s)<br />
+            From record @Model.FirstItemOnPage to @Model.LastItemOnPage<br />
+        </p>
     </main>
 
     <style>

@@ -26,26 +26,26 @@ namespace WebApplication.Controllers
         
         public ActionResult MaintainCategory(string type, int page = 1)
         {
-            if (page < 1)
+            var Category = db.Product_Category.OrderBy(c => c.ID).ToPagedList(page, 8); // Default all product when first loading
+
+            if (page < 1) //if page less than 1 redirect to page 1
             {
-                // Goto First Page
                 return RedirectToAction(null, new { page = 1 });
             }
 
-            var Category = db.Product_Category.OrderBy(c => c.ID).ToPagedList(page, 2);
-
-            if (page > Category.PageCount)
+            if (page > Category.PageCount) // if page more than 
             {
                 return RedirectToAction(null, new { page = Category.PageCount });
             }
 
-            if (Request.IsAjaxRequest())
+            if (Request.IsAjaxRequest()) //if request from ajax Search & Paging
             {
-                var Specific_Category = db.Product_Category.Where(o => o.Type.Contains(type));
-                System.Threading.Thread.Sleep(1000); // Sleep 1 second
+
+                //System.Threading.Thread.Sleep(1000); // Sleep 1 second
                 
-                if(type != null)
+                if(type != null) 
                 {
+                    var Specific_Category = db.Product_Category.Where(o => o.Type.Contains(type)).OrderBy(o => o.ID).ToPagedList(page, 8);
                     return PartialView("_SearchCategory", Specific_Category); // Return partial and search
                 }
                 else
@@ -54,7 +54,7 @@ namespace WebApplication.Controllers
                 }
 
             }
-            return View(Category); // Return entire
+            return View(Category); // Return entire product
         }
 
         public ActionResult EditCategory(int id)
@@ -136,16 +136,22 @@ namespace WebApplication.Controllers
 
             int id = Pcategory.ID;
 
-            for (int i = 0; i < category.New_Sub_Category.Count(); i++)
+            try
             {
-                var NewSubCategory = new Sub_Product_Category
+                for (int i = 0; i < category.New_Sub_Category.Count(); i++)
                 {
-                    PC_ID = id,
-                    Type = category.New_Sub_Category[i].Type,
-                    Description = category.New_Sub_Category[i].Description
-                };
-                db.Sub_Product_Category.Add(NewSubCategory);
-                db.SaveChanges();
+                    var NewSubCategory = new Sub_Product_Category
+                    {
+                        PC_ID = id,
+                        Type = category.New_Sub_Category[i].Type,
+                        Description = category.New_Sub_Category[i].Description
+                    };
+                    db.Sub_Product_Category.Add(NewSubCategory);
+                    db.SaveChanges();
+                }
+            }catch(Exception ex)
+            {
+
             }
 
             return RedirectToAction("MaintainCategory");
