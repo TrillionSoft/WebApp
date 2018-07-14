@@ -41,11 +41,11 @@
         var ajaxOption = new AjaxOptions { UpdateTargetId = "target", OnSuccess = "highlight" };
     }   
           @Html.PagedListPager(Model, n => "?page=" + n + "&Type="+Request.QueryString["Type"], PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(options, ajaxOption))
-        <p>
+        @*<p>
             Page @Model.PageNumber of @Model.PageCount<br />
             Showing @Model.Count of @Model.TotalItemCount record(s)<br />
             From record @Model.FirstItemOnPage to @Model.LastItemOnPage<br />
-        </p>
+        </p>*@
     </main>
 
     <style>
