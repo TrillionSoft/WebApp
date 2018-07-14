@@ -21,8 +21,8 @@
         </div>
     }
 
-    @*<button class="newButton" style="margin-left:25px;margin-top:50px"><span>Add New Category</span></button>*@
-    @Html.ActionLink("Add New Category", "AddCategory", null, new { @class = "newButton", style = "margin-left:25px;margin-top:50px" })
+    <button class="newButton" style="margin-left:25px;margin-top:50px" onclick="location.href='/admin/AddCategory'; "><span>Add New Category</span></button>
+   @*@Html.ActionLink("Add New Category", "AddCategory", null, new { @class = "newButton", style = "margin-left:25px;margin-top:50px" })*@
 
     <br />
 
