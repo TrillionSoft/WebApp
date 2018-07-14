@@ -55,9 +55,9 @@
                             </i>Maintain Category
                         </a>
                     </li>
-                    <li>
+                    @*<li>
                         <a href="#"> <i class="menu-icon ti-email"></i>Maintain S-Category</a>
-                    </li>
+                    </li>*@
 
                     @*<li class="menu-item-has-children dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart"></i>Charts</a>
@@ -192,13 +192,13 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h3 style="padding-left:30px">@ViewBag.Title</h3>
+                        <h3 style="padding-left:30px"><b style="font-family:Impact">@ViewBag.Title</b></h3>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="content mt-3" style="padding-left:2%; clear:both">
+        <div class="content mt-3" style="padding-left:2%; clear:both;height:100%">
             @RenderBody()
             @* Content *@
 

@@ -38,10 +38,10 @@
         options.LinkToPreviousPageFormat = "<";
         options.LinkToNextPageFormat = ">";
 
-        var ajaxOption = new AjaxOptions { UpdateTargetId = "target", OnSuccess = "highlight" };
+        var ajaxOption = new AjaxOptions { UpdateTargetId = "target", OnSuccess = "highlight",LoadingElementId = "loader"};
     }   
           @Html.PagedListPager(Model, n => "?page=" + n + "&Type="+Request.QueryString["Type"], PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(options, ajaxOption))
-        @*<p>
+      @*<p>
             Page @Model.PageNumber of @Model.PageCount<br />
             Showing @Model.Count of @Model.TotalItemCount record(s)<br />
             From record @Model.FirstItemOnPage to @Model.LastItemOnPage<br />
@@ -49,7 +49,7 @@
     </main>
 
     <style>
-
+       
         html {
             font-size: 62.5%;
         }
@@ -106,7 +106,7 @@
         }
 
         thead th {
-            background-color: #202932;
+            background-color: black;
             color: #fff;
             border: 1px solid #202932;
         }

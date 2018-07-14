@@ -5,87 +5,164 @@
     Layout = "~/Views/Layout/_AdminLayout.cshtml";
 }
 
-    @using (Ajax.BeginForm(null, null, null, new AjaxOptions
-    {
-        HttpMethod = "Get",
-        UpdateTargetId = "target",
-        LoadingElementId = "loader",
-        OnSuccess = "highlight"
-    }))
-        {
+@using (Ajax.BeginForm(null, null, null, new AjaxOptions
+{
+    HttpMethod = "Get",
+    UpdateTargetId = "target",
+    LoadingElementId = "loader",
+    OnSuccess = "highlight"
+}))
+{
 
-        <div style="float:right;padding-right:30px;padding-bottom:30px;padding-top:50px">
-            <i class="fa fa-search" style="padding-right:10px"></i>
-            @Html.TextBox("Type", null, new { autofocus = "", autocomplete = "off", placeholder = "Search Here" })
-            <img src="~/images/loader-16.gif" id="loader" style="display: none" />
-        </div>
-    }
+   
+    <div class="Search" style="max-width:300px;float:right;margin-top:60px;margin-right:30px">
+        @Html.TextBox("Type", null, new { autofocus = "", autocomplete = "off", placeholder = "Search Here" })
+        <button type="submit"><i class="fa fa-search"></i></button>
 
-    <button class="newButton" style="margin-left:25px;margin-top:50px" onclick="location.href='/admin/AddCategory'; "><span>Add New Category</span></button>
-   @*@Html.ActionLink("Add New Category", "AddCategory", null, new { @class = "newButton", style = "margin-left:25px;margin-top:50px" })*@
-
-    <br />
-
-    <div id="target">
-        @Html.Partial("_SearchCategory")
     </div>
+}
+<div id="loader" class="loader" style="display:none;float:right;margin-right:20px;margin-top:65px"></div>
+<button class="newButton" style="margin-left:25px;margin-top:60px;font-family:initial" onclick="location.href='/admin/AddCategory'; "><span> Category</span></button>
+@*@Html.ActionLink("Add New Category", "AddCategory", null, new { @class = "newButton", style = "margin-left:25px;margin-top:50px" })*@
 
-    
+<br />
 
-    @section footer {
-        <script>
-            function highlight() {
-                var type = $("#Type").val();
+<div id="target">
+    @Html.Partial("_SearchCategory")
+</div>
 
-                if (type.trim()) {
-                    var re = new RegExp("(" + type + ")", "gi");
 
-                    $("tr").find("td:nth(1)").each(function () {
-                        var html = $(this).html().replace(re, "<b style='color:red'>$1</b>");
-                        $(this).html(html);
-                    });
-                }
+
+@section footer {
+    <script>
+        function highlight() {
+            var type = $("#Type").val();
+
+            if (type.trim()) {
+                var re = new RegExp("(" + type + ")", "gi");
+
+                $("tr").find("td:nth(1)").each(function () {
+                    var html = $(this).html().replace(re, "<b style='color:red'>$1</b>");
+                    $(this).html(html);
+                });
             }
-        </script>
-    }
+        }
+    </script>
+}
 
 <style>
-  .newButton{
-  display: inline-block;
-  border-radius: 4px;
-  background-color: #4b908f;
-  border: none;
-  color: #FFFFFF;
-  text-align: center;
-  padding:10px;
-  width: 200px;
-  transition: all 0.5s;
-  cursor: pointer;
-  }
+    .newButton {
+        display: inline-block;
+        border-radius: 6px; 
+        color: #3b4042;
+        background: transparent; 
+        border: 2px solid #6a7d84;
+        text-align: center;
+        padding: 5px;
+        width: 180px;
+        transition: all 0.5s;
+        cursor: pointer;
+    }
 
-  .newButton span:after {
-  content: '+';
-  position: absolute;
-  opacity: 0;
-  top: 0;
-  right: -20px;
-  transition: 0.5s;
-}
+        .newButton span:after {
+            content: '+';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+        }
 
-  
-.newButton span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
 
-.newButton:hover span {
-  padding-right: 25px;
-}
+        .newButton span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
 
-.newButton:hover span:after {
-  opacity: 1;
-  right: 0;
-}
+        .newButton:hover span {
+            padding-right: 25px;
+        }
+
+            .newButton:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+
+
+
+    /*Search Bar & Button*/
+
+    Search {
+        font-family: Arial;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .Search input[type=text] {
+        font-family:initial;
+        padding: 5px;
+        font-size: 17px;
+        border: 1px solid grey;
+        float: left;
+        width: 80%;
+        background: #f1f1f1;
+    }
+
+    .Search button {
+        float: left;
+        width: 20%;
+        padding: 5px;
+        background: #2196F3;
+        color: white;
+        font-size: 17px;
+        border: 1px solid grey;
+        border-left: none;
+        cursor: pointer;
+    }
+
+        .Search button:hover {
+            background: #0b7dda;
+        }
+
+    .Search::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /*Loader*/
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 5px solid grey;
+        width: 20px;
+        height: 20px;
+        -webkit-animation: spin 0.5s linear infinite; /* Safari */
+        animation: spin 0.5s linear infinite;
+    }
+
+    /* Safari */
+    @@-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 </style>
